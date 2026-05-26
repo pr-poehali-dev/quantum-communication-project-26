@@ -1,7 +1,11 @@
 import { useScroll, useTransform, motion } from "framer-motion";
 import { useRef } from "react";
 
-export default function Hero() {
+interface HeroProps {
+  onZapiska?: () => void;
+}
+
+export default function Hero({ onZapiska }: HeroProps) {
   const container = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: container,
@@ -36,9 +40,12 @@ export default function Hero() {
           Подайте записку, закажите молебен или посетите нашу церковную лавку
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#services" className="bg-white text-neutral-900 px-8 py-3 uppercase text-sm tracking-wide hover:bg-neutral-200 transition-colors">
+          <button
+            onClick={onZapiska}
+            className="bg-white text-neutral-900 px-8 py-3 uppercase text-sm tracking-wide hover:bg-neutral-200 transition-colors"
+          >
             Подать записку
-          </a>
+          </button>
           <a href="#shop" className="border border-white text-white px-8 py-3 uppercase text-sm tracking-wide hover:bg-white/10 transition-colors">
             Церковная лавка
           </a>

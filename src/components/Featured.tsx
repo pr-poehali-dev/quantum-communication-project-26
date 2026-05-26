@@ -1,4 +1,8 @@
-export default function Featured() {
+interface FeaturedProps {
+  onZapiska?: () => void;
+}
+
+export default function Featured({ onZapiska }: FeaturedProps) {
   const items = [
     {
       icon: "✉️",
@@ -45,7 +49,11 @@ export default function Featured() {
             </div>
           ))}
         </div>
-        <button id="shop" className="mt-8 bg-black text-white border border-black px-6 py-3 text-sm transition-all duration-300 hover:bg-white hover:text-black cursor-pointer w-fit uppercase tracking-wide">
+        <button
+          id="shop"
+          onClick={onZapiska}
+          className="mt-8 bg-black text-white border border-black px-6 py-3 text-sm transition-all duration-300 hover:bg-white hover:text-black cursor-pointer w-fit uppercase tracking-wide"
+        >
           Подать записку
         </button>
       </div>
