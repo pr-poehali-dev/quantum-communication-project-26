@@ -19,19 +19,29 @@ export default function Hero() {
         className="absolute inset-0 w-full h-full"
       >
         <img
-          src="/images/mountain-landscape.jpg"
-          alt="Mountain landscape"
+          src="https://cdn.poehali.dev/projects/ec2cbb56-766d-41f6-a146-4fbb1a6e7f6b/files/ebc2fdd7-aff6-40a3-adea-fcef2d36e59e.jpg"
+          alt="Храм Иосифа Иолоцкого"
           className="w-full h-full object-cover"
         />
       </motion.div>
 
-      <div className="relative z-10 text-center text-white">
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6">
-          ОТКРОЙ
+      <div className="absolute inset-0 bg-black/40" />
+      <div className="relative z-10 text-center text-white px-4">
+        <p className="text-sm md:text-base uppercase tracking-widest mb-4 opacity-80">Православный приход</p>
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 leading-tight">
+          ХРАМ<br />ИОСИФА<br />ИОЛОЦКОГО
         </h1>
-        <p className="text-lg md:text-xl max-w-2xl mx-auto px-6 opacity-90">
-          Исследуй границы дизайна с иммерсивным параллакс-эффектом
+        <p className="text-lg md:text-xl max-w-xl mx-auto opacity-90 mb-8">
+          Подайте записку, закажите молебен или посетите нашу церковную лавку
         </p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#services" className="bg-white text-neutral-900 px-8 py-3 uppercase text-sm tracking-wide hover:bg-neutral-200 transition-colors">
+            Подать записку
+          </a>
+          <a href="#shop" className="border border-white text-white px-8 py-3 uppercase text-sm tracking-wide hover:bg-white/10 transition-colors">
+            Церковная лавка
+          </a>
+        </div>
       </div>
     </div>
   );
