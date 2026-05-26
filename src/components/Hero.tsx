@@ -19,13 +19,14 @@ export default function Hero() {
         className="absolute inset-0 w-full h-full"
       >
         <img
-          src="https://cdn.poehali.dev/projects/ec2cbb56-766d-41f6-a146-4fbb1a6e7f6b/files/ebc2fdd7-aff6-40a3-adea-fcef2d36e59e.jpg"
-          alt="Храм Иосифа Иолоцкого"
-          className="w-full h-full object-cover"
+          src="https://cdn.poehali.dev/projects/ec2cbb56-766d-41f6-a146-4fbb1a6e7f6b/bucket/4d6b94dd-3960-4409-982c-98d33d74ca48.jpg"
+          alt="Храм Иосифа Волоцкого"
+          className="w-full h-full object-cover object-center scale-110"
+          style={{ objectPosition: "50% 30%" }}
         />
       </motion.div>
 
-      <div className="absolute inset-0 bg-black/40" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/10" />
       <div className="relative z-10 text-center text-white px-4">
         <p className="text-sm md:text-base uppercase tracking-widest mb-4 opacity-80">Православный приход</p>
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 leading-tight">
