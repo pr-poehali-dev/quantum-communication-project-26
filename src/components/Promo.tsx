@@ -31,8 +31,7 @@ export default function Promo() {
       </h3>
 
       <p className="absolute bottom-12 right-6 text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-5xl z-10">
-        Иконы, платки, свечи и предметы веры — всё необходимое для духовной жизни
-        с доставкой прямо к вам домой.
+        Иконы, платки, свечи и предметы веры — всё необходимое для духовной жизни.
       </p>
     </div>
   );
