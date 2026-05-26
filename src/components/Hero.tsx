@@ -29,7 +29,7 @@ export default function Hero() {
       <div className="relative z-10 text-center text-white px-4">
         <p className="text-sm md:text-base uppercase tracking-widest mb-4 opacity-80">Православный приход</p>
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 leading-tight">
-          ХРАМ<br />ИОСИФА<br />ИОЛОЦКОГО
+          ХРАМ<br />ИОСИФА<br />ВОЛОЦКОГО
         </h1>
         <p className="text-lg md:text-xl max-w-xl mx-auto opacity-90 mb-8">
           Подайте записку, закажите молебен или посетите нашу церковную лавку
