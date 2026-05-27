@@ -24,7 +24,7 @@ export default function Hero({ onZapiska, onDonate }: HeroProps) {
         className="absolute inset-0 w-full h-full"
       >
         <img
-          src="https://cdn.poehali.dev/projects/ec2cbb56-766d-41f6-a146-4fbb1a6e7f6b/bucket/4d6b94dd-3960-4409-982c-98d33d74ca48.jpg"
+          src="https://cdn.poehali.dev/projects/ec2cbb56-766d-41f6-a146-4fbb1a6e7f6b/bucket/3abf1a56-cd84-406a-92fb-956cebdfa0d8.png"
           alt="Храм Иосифа Волоцкого"
           className="w-full h-full object-cover object-center scale-110"
           style={{ objectPosition: "50% 30%" }}
