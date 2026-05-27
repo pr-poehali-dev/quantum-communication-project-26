@@ -3,9 +3,10 @@ import { useRef } from "react";
 
 interface HeroProps {
   onZapiska?: () => void;
+  onDonate?: () => void;
 }
 
-export default function Hero({ onZapiska }: HeroProps) {
+export default function Hero({ onZapiska, onDonate }: HeroProps) {
   const container = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: container,
@@ -49,6 +50,12 @@ export default function Hero({ onZapiska }: HeroProps) {
           <a href="#shop" className="border border-white text-white px-8 py-3 uppercase text-sm tracking-wide hover:bg-white/10 transition-colors">
             Церковная лавка
           </a>
+          <button
+            onClick={onDonate}
+            className="border border-white/50 text-white/80 px-8 py-3 uppercase text-sm tracking-wide hover:bg-white/10 hover:text-white transition-colors"
+          >
+            Пожертвовать
+          </button>
         </div>
       </div>
     </div>
