@@ -68,7 +68,7 @@ export default function Footer() {
             </div>
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 sm:gap-0">
               <img
-                src="https://cdn.poehali.dev/projects/ec2cbb56-766d-41f6-a146-4fbb1a6e7f6b/bucket/1db9dc60-9d3b-4e68-9a16-e643f0f80158.png"
+                src="https://cdn.poehali.dev/projects/ec2cbb56-766d-41f6-a146-4fbb1a6e7f6b/bucket/e0add753-6634-490a-bc74-691b4ba417ad.png"
                 alt="Храм Иосифа Волоцкого"
                 className="h-24 sm:h-32 lg:h-40 w-auto object-contain mt-4 sm:mt-6 lg:mt-10"
               />
