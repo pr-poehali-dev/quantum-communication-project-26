@@ -62,7 +62,6 @@ export default function Featured({ onZapiska }: FeaturedProps) {
           )}
         </div>
         <button
-          id="shop"
           onClick={onZapiska}
           className="mt-8 bg-black text-white border border-black px-6 py-3 text-sm transition-all duration-300 hover:bg-white hover:text-black cursor-pointer w-fit uppercase tracking-wide"
         >
