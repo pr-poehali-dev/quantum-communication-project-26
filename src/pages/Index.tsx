@@ -16,7 +16,7 @@ const Index = () => {
 
   return (
     <main className="min-h-screen">
-      <Header />
+      <Header onDonate={() => setDonateOpen(true)} />
       <Hero onZapiska={() => setModalOpen(true)} onDonate={() => setDonateOpen(true)} />
       <Featured onZapiska={() => setModalOpen(true)} />
       <EventsFeed />

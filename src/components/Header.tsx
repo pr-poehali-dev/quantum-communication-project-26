@@ -13,9 +13,10 @@ const navItems = [
 
 interface HeaderProps {
   className?: string;
+  onDonate?: () => void;
 }
 
-export default function Header({ className }: HeaderProps) {
+export default function Header({ className, onDonate }: HeaderProps) {
   const [open, setOpen] = useState(false);
   const location = useLocation();
 
@@ -93,6 +94,12 @@ export default function Header({ className }: HeaderProps) {
               </button>
             )
           )}
+          <button
+            onClick={() => { setOpen(false); onDonate?.(); }}
+            className="mt-4 w-full border border-white/30 text-white py-3 uppercase text-sm tracking-wide hover:bg-white/10 transition-colors"
+          >
+            Пожертвовать
+          </button>
         </nav>
       </div>
     </>
