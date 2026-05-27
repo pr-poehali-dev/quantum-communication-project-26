@@ -33,7 +33,7 @@ export default function Header({ className, onDonate }: HeaderProps) {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-20 p-4 pl-3 md:pl-6 bg-black/50 backdrop-blur-sm ${className ?? ""}`}>
+      <header className={`fixed top-0 left-0 right-0 z-20 p-4 pl-3 md:pl-6 ${className ?? ""}`}>
         <div className="flex justify-between items-center">
           <Link to="/">
             <img
