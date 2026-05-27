@@ -9,7 +9,7 @@ export default function Header({ className }: HeaderProps) {
         <img
           src="https://cdn.poehali.dev/projects/ec2cbb56-766d-41f6-a146-4fbb1a6e7f6b/bucket/e0add753-6634-490a-bc74-691b4ba417ad.png"
           alt="Храм Иосифа Волоцкого"
-          className="h-14 w-auto object-contain"
+          className="h-14 w-auto object-contain brightness-0 invert"
         />
         <nav className="flex gap-8">
           <a
