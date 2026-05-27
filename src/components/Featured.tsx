@@ -1,26 +1,31 @@
+import { Link } from "react-router-dom";
+
 interface FeaturedProps {
   onZapiska?: () => void;
 }
 
-export default function Featured({ onZapiska }: FeaturedProps) {
-  const items = [
-    {
-      icon: "⛪",
-      title: "История храма",
-      desc: "Узнайте об истории основания и развития прихода храма Иосифа Волоцкого",
-    },
-    {
-      icon: "📅",
-      title: "Расписание богослужений",
-      desc: "Узнайте время литургий, вечерних служб и праздничных богослужений",
-    },
-    {
-      icon: "🕊️",
-      title: "Жизнь в храме",
-      desc: "События, праздники и будни православного прихода — фото и новости",
-    },
-  ];
+const items = [
+  {
+    icon: "⛪",
+    title: "История храма",
+    desc: "Узнайте об истории основания и развития прихода храма Иосифа Волоцкого",
+    href: "/history",
+  },
+  {
+    icon: "📅",
+    title: "Расписание богослужений",
+    desc: "Узнайте время литургий, вечерних служб и праздничных богослужений",
+    href: null,
+  },
+  {
+    icon: "🕊️",
+    title: "Жизнь в храме",
+    desc: "События, праздники и будни православного прихода — фото и новости",
+    href: null,
+  },
+];
 
+export default function Featured({ onZapiska }: FeaturedProps) {
   return (
     <div id="services" className="min-h-screen px-6 py-20 bg-white flex flex-col lg:flex-row lg:items-center gap-12">
       <div className="flex-1 h-[400px] lg:h-[700px]">
@@ -36,13 +41,25 @@ export default function Featured({ onZapiska }: FeaturedProps) {
           Духовная жизнь прихода — онлайн и в храме
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {items.map((item) => (
-            <div key={item.title} className="border border-neutral-200 p-5 hover:border-neutral-400 transition-colors">
-              <div className="text-2xl mb-3">{item.icon}</div>
-              <h4 className="font-semibold text-neutral-900 mb-2 text-sm uppercase tracking-wide">{item.title}</h4>
-              <p className="text-neutral-600 text-sm leading-relaxed">{item.desc}</p>
-            </div>
-          ))}
+          {items.map((item) =>
+            item.href ? (
+              <Link
+                key={item.title}
+                to={item.href}
+                className="border border-neutral-200 p-5 hover:border-neutral-900 transition-colors group"
+              >
+                <div className="text-2xl mb-3">{item.icon}</div>
+                <h4 className="font-semibold text-neutral-900 mb-2 text-sm uppercase tracking-wide group-hover:underline">{item.title}</h4>
+                <p className="text-neutral-600 text-sm leading-relaxed">{item.desc}</p>
+              </Link>
+            ) : (
+              <div key={item.title} className="border border-neutral-200 p-5 hover:border-neutral-400 transition-colors">
+                <div className="text-2xl mb-3">{item.icon}</div>
+                <h4 className="font-semibold text-neutral-900 mb-2 text-sm uppercase tracking-wide">{item.title}</h4>
+                <p className="text-neutral-600 text-sm leading-relaxed">{item.desc}</p>
+              </div>
+            )
+          )}
         </div>
         <button
           id="shop"
