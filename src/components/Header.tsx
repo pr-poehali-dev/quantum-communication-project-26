@@ -5,7 +5,7 @@ import Icon from "@/components/ui/icon";
 const navItems = [
   { label: "Главная", href: "/" },
   { label: "История храма", href: "/history" },
-  { label: "Расписание", href: "#schedule" },
+  { label: "Расписание", href: "/schedule" },
   { label: "Жизнь в храме", href: "#life" },
   { label: "Церковная лавка", href: "#shop" },
   { label: "Как добраться", href: "#contact" },
