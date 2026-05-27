@@ -38,7 +38,7 @@ export default function ShopCatalog() {
       : products.filter((p) => p.category === activeCategory);
 
   return (
-    <section id="shop" className="bg-white py-20 px-6">
+    <section id="shop" className="bg-neutral-100 py-20 px-6">
       <div className="max-w-6xl mx-auto">
         <p className="text-xs uppercase tracking-widest text-neutral-500 mb-2">Церковная лавка</p>
         <h2 className="text-3xl lg:text-4xl font-bold text-neutral-900 mb-3">Каталог товаров</h2>
