@@ -45,7 +45,7 @@ export default function Schedule() {
           </a>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-16">
           {[
             { icon: "CalendarDays", title: "Расписание на неделю", desc: "Актуальное расписание всех служб" },
             { icon: "Bell", title: "Напоминания", desc: "Уведомления о праздниках и службах" },
@@ -57,6 +57,27 @@ export default function Schedule() {
               <p className="text-neutral-500 text-sm leading-relaxed">{item.desc}</p>
             </div>
           ))}
+        </div>
+
+        <div className="border-t border-neutral-200 pt-12">
+          <p className="text-xs uppercase tracking-widest text-neutral-500 mb-6">Расписание богослужений — май 2025</p>
+          <div className="flex flex-col gap-6">
+            {[
+              "https://cdn.poehali.dev/files/5ac23318-3f94-46fc-bd14-755261e3d1ca.png",
+              "https://cdn.poehali.dev/files/685033c9-ebd6-4217-a24d-c549af5f8c18.png",
+              "https://cdn.poehali.dev/files/858dc0e2-9cd2-4bc1-8222-9a20165e1f0a.png",
+              "https://cdn.poehali.dev/files/28bf4a98-b772-49e9-a620-b0ccec88b291.png",
+              "https://cdn.poehali.dev/files/50257cda-dd0e-42ec-91fe-14082d2cdbac.png",
+            ].map((src, i) => (
+              <a key={i} href={src} target="_blank" rel="noopener noreferrer">
+                <img
+                  src={src}
+                  alt={`Расписание богослужений, страница ${i + 1}`}
+                  className="w-full border border-neutral-200 hover:border-neutral-400 transition-colors"
+                />
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </main>
