@@ -41,21 +41,18 @@ export default function Hero({ onZapiska, onDonate }: HeroProps) {
           Подайте записку, закажите молебен или посетите нашу церковную лавку
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button
-            onClick={onZapiska}
-            className="bg-white text-neutral-900 px-8 py-3 uppercase text-sm tracking-wide hover:bg-neutral-200 transition-colors"
-          >
-            Подать записку
-          </button>
-          <a href="#shop" className="border border-white text-white px-8 py-3 uppercase text-sm tracking-wide hover:bg-white/10 transition-colors">
-            Церковная лавка
+          <a href="/schedule" className="bg-white text-neutral-900 px-8 py-3 uppercase text-sm tracking-wide hover:bg-neutral-200 transition-colors">
+            Расписание
           </a>
           <button
-            onClick={onDonate}
-            className="border border-white/50 text-white/80 px-8 py-3 uppercase text-sm tracking-wide hover:bg-white/10 hover:text-white transition-colors"
+            onClick={onZapiska}
+            className="border border-white text-white px-8 py-3 uppercase text-sm tracking-wide hover:bg-white/10 transition-colors"
           >
-            Пожертвовать
+            Требы
           </button>
+          <a href="#icons" className="border border-white/50 text-white/80 px-8 py-3 uppercase text-sm tracking-wide hover:bg-white/10 hover:text-white transition-colors">
+            Иконы храма
+          </a>
         </div>
       </div>
     </div>
