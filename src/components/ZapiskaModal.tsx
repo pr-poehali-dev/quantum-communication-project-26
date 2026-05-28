@@ -1,14 +1,15 @@
 import { useState } from "react";
 import Icon from "@/components/ui/icon";
 
-type Step = "choose-service" | "choose-type" | "form";
+type Step = "choose-service" | "choose-type" | "choose-tainstvo" | "form";
 type ServiceKey =
   | "prostaya"
   | "zakaznaya"
   | "sorokoust"
   | "polugodovoe"
   | "moleben"
-  | "panikhida";
+  | "panikhida"
+  | "tainstvo";
 type Type = "zdravie" | "upokoy" | null;
 
 interface Props {
@@ -65,6 +66,13 @@ const SERVICES: {
     desc: "Заупокойная служба, которая совершается перед специальным столом — кануном.",
     types: ["upokoy"],
   },
+  {
+    key: "tainstvo",
+    title: "Таинства",
+    short: "Крещение или венчание",
+    desc: "Запись на совершение таинства в храме. Уточните удобное время у священника.",
+    types: [],
+  },
 ];
 
 export default function ZapiskaModal({ open, onClose }: Props) {
@@ -81,7 +89,9 @@ export default function ZapiskaModal({ open, onClose }: Props) {
   const handleSelectService = (key: ServiceKey) => {
     const s = SERVICES.find((sv) => sv.key === key)!;
     setService(key);
-    if (s.types.length === 1) {
+    if (key === "tainstvo") {
+      setStep("choose-tainstvo");
+    } else if (s.types.length === 1) {
       setType(s.types[0]);
       setStep("form");
     } else {
@@ -192,6 +202,52 @@ export default function ZapiskaModal({ open, onClose }: Props) {
           </div>
         )}
 
+        {/* Step 2b — выбор таинства */}
+        {step === "choose-tainstvo" && (
+          <div className="p-8">
+            <button
+              onClick={() => setStep("choose-service")}
+              className="flex items-center gap-1 text-neutral-400 hover:text-neutral-900 transition-colors text-sm mb-6"
+            >
+              <Icon name="ChevronLeft" size={16} />
+              Назад
+            </button>
+            <p className="text-xs uppercase tracking-widest text-neutral-500 mb-1">Таинства</p>
+            <h2 className="text-xl font-bold text-neutral-900 mb-2">Выберите таинство</h2>
+            <p className="text-neutral-500 text-sm mb-6 leading-relaxed">
+              Для совершения таинства необходима предварительная договорённость со священником.
+            </p>
+            <div className="flex flex-col gap-4">
+              <button
+                onClick={() => { setType(null); setNames("Крещение"); setSubmitted(true); }}
+                className="group border-2 border-neutral-200 hover:border-neutral-900 p-5 text-left transition-all duration-200"
+              >
+                <div className="flex items-center gap-4">
+                  <span className="text-2xl">💧</span>
+                  <div>
+                    <p className="font-bold text-neutral-900 uppercase tracking-wide text-sm">Крещение</p>
+                    <p className="text-neutral-500 text-xs mt-0.5">Таинство вхождения в Церковь</p>
+                  </div>
+                  <Icon name="ChevronRight" size={18} className="ml-auto text-neutral-300 group-hover:text-neutral-900 transition-colors" />
+                </div>
+              </button>
+              <button
+                onClick={() => { setType(null); setNames("Венчание"); setSubmitted(true); }}
+                className="group border-2 border-neutral-200 hover:border-neutral-900 p-5 text-left transition-all duration-200"
+              >
+                <div className="flex items-center gap-4">
+                  <span className="text-2xl">💍</span>
+                  <div>
+                    <p className="font-bold text-neutral-900 uppercase tracking-wide text-sm">Венчание</p>
+                    <p className="text-neutral-500 text-xs mt-0.5">Таинство церковного брака</p>
+                  </div>
+                  <Icon name="ChevronRight" size={18} className="ml-auto text-neutral-300 group-hover:text-neutral-900 transition-colors" />
+                </div>
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* Step 3 — имена */}
         {step === "form" && !submitted && selectedService && (
           <div className="p-8">
@@ -235,10 +291,22 @@ export default function ZapiskaModal({ open, onClose }: Props) {
         {submitted && (
           <div className="p-8 text-center">
             <div className="text-5xl mb-4">🙏</div>
-            <h2 className="text-2xl font-bold text-neutral-900 mb-3">Записка принята</h2>
-            <p className="text-neutral-500 text-sm mb-6">
-              Ваши имена будут прочитаны на ближайшей службе.<br />Бог в помощь!
-            </p>
+            {service === "tainstvo" ? (
+              <>
+                <h2 className="text-2xl font-bold text-neutral-900 mb-3">Заявка принята</h2>
+                <p className="text-neutral-500 text-sm mb-6 leading-relaxed">
+                  Ваша заявка на <strong>{names}</strong> получена.<br />
+                  Священник свяжется с вами для уточнения времени.
+                </p>
+              </>
+            ) : (
+              <>
+                <h2 className="text-2xl font-bold text-neutral-900 mb-3">Записка принята</h2>
+                <p className="text-neutral-500 text-sm mb-6">
+                  Ваши имена будут прочитаны на ближайшей службе.<br />Бог в помощь!
+                </p>
+              </>
+            )}
             <button
               onClick={handleClose}
               className="bg-neutral-900 text-white px-8 py-3 uppercase text-sm tracking-wide hover:bg-neutral-700 transition-colors"
