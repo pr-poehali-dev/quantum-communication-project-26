@@ -1,89 +1,252 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 
+const week = [
+  {
+    date: "25 мая", weekday: "Понедельник",
+    saint: "Сщмч. Ермогена, патриарха Московского",
+    highlight: null,
+    services: [
+      { time: "8:45", name: "Исповедь" },
+      { time: "9:00", name: "Литургия" },
+    ],
+  },
+  {
+    date: "26 мая", weekday: "Вторник",
+    saint: "Мц. Гликерии девы",
+    highlight: null,
+    services: [
+      { time: "8:45", name: "Исповедь" },
+      { time: "9:00", name: "Литургия" },
+    ],
+  },
+  {
+    date: "27 мая", weekday: "Среда",
+    saint: "Мч. Исидора. Блж. Исидора Ростовского",
+    highlight: null,
+    services: [
+      { time: "8:45", name: "Исповедь" },
+      { time: "9:00", name: "Литургия" },
+    ],
+  },
+  {
+    date: "28 мая", weekday: "Четверг",
+    saint: "Прп. Пахомия Великого. Блгв. царевича Димитрия Угличского",
+    highlight: null,
+    services: [
+      { time: "8:45", name: "Исповедь" },
+      { time: "9:00", name: "Литургия" },
+    ],
+  },
+  {
+    date: "29 мая", weekday: "Пятница",
+    saint: "Отдание праздника Вознесения Господня",
+    highlight: "Вознесение",
+    services: [
+      { time: "8:45", name: "Исповедь" },
+      { time: "9:00", name: "Литургия" },
+      { time: "18:00", name: "Заупокойное богослужение" },
+    ],
+  },
+  {
+    date: "30 мая", weekday: "Суббота",
+    saint: "Троицкая родительская суббота",
+    highlight: "Родительская суббота",
+    services: [
+      { time: "8:30", name: "Исповедь" },
+      { time: "9:00", name: "Литургия, молебен прп. Иосифу Волоцкому, Панихида" },
+      { time: "17:00", name: "Всенощное бдение с литией, Исповедь" },
+    ],
+  },
+  {
+    date: "31 мая", weekday: "Воскресенье",
+    saint: "День Святой Троицы. Пятидесятница",
+    highlight: "Троица",
+    services: [
+      { time: "8:15", name: "Лития, Водосвятный молебен, Исповедь" },
+      { time: "9:00", name: "Литургия, Вечерня с коленопреклоненными молитвами" },
+      { time: "10:40", name: "Молебен о семейной жизни святым Петру и Февронии" },
+    ],
+  },
+];
+
+const isConfession = (s: { name: string }) =>
+  s.name.toLowerCase().includes("исповедь");
+
+const isCommunion = (s: { name: string }) =>
+  s.name.toLowerCase().includes("литургия");
+
 export default function Schedule() {
+  const [showFull, setShowFull] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const confessionDays = week.filter((d) => d.services.some(isConfession));
+
   return (
     <main className="min-h-screen bg-white">
       <header className="bg-neutral-900 px-6 py-5 flex items-center gap-4">
-        <Link to="/" className="text-neutral-400 hover:text-white transition-colors flex items-center gap-2 text-sm uppercase tracking-wide">
+        <Link
+          to="/"
+          className="text-neutral-400 hover:text-white transition-colors flex items-center gap-2 text-sm uppercase tracking-wide"
+        >
           <Icon name="ArrowLeft" size={16} />
           На главную
         </Link>
       </header>
 
-      <div className="max-w-2xl mx-auto px-6 py-16 sm:py-24">
-        <p className="text-xs uppercase tracking-widest text-neutral-500 mb-3">Telegram-бот</p>
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-light uppercase tracking-widest text-neutral-900 mb-8">
-          Расписание богослужений
+      <div className="max-w-2xl mx-auto px-6 py-14">
+
+        {/* Heading */}
+        <p className="text-xs uppercase tracking-widest text-neutral-500 mb-3">Расписание</p>
+        <h1 className="text-3xl sm:text-4xl font-light uppercase tracking-widest text-neutral-900 mb-2">
+          Богослужения
         </h1>
+        <p className="text-neutral-500 text-sm mb-12">25–31 мая 2026</p>
 
-        <p className="text-neutral-600 text-base sm:text-lg leading-relaxed mb-6">
-          Узнайте актуальное расписание литургий, вечерних служб и праздничных богослужений через наш Telegram-бот.
-        </p>
-        <p className="text-neutral-600 text-base sm:text-lg leading-relaxed mb-12">
-          Бот присылает расписание на неделю, напоминает о праздниках и информирует об изменениях в службах.
-        </p>
+        {/* Block 1 — Confession & Communion */}
+        <section className="mb-12">
+          <div className="flex items-center gap-3 mb-6">
+            <Icon name="HeartHandshake" size={20} className="text-neutral-400" />
+            <h2 className="text-xs uppercase tracking-widest text-neutral-700 font-semibold">Исповедь и причастие</h2>
+          </div>
+          <p className="text-neutral-500 text-sm mb-5 leading-relaxed">
+            Исповедь совершается перед каждой Литургией. Причастие — по окончании Литургии.
+          </p>
+          <div className="flex flex-col gap-3">
+            {confessionDays.map((day) => {
+              const confTime = day.services.find(isConfession)?.time;
+              const liturgyTime = day.services.find(isCommunion)?.time;
+              return (
+                <div
+                  key={day.date}
+                  className={`flex items-center justify-between border px-5 py-4 ${
+                    day.highlight
+                      ? "border-neutral-900 bg-neutral-50"
+                      : "border-neutral-200"
+                  }`}
+                >
+                  <div>
+                    <span className="font-semibold text-neutral-900 text-sm">{day.date}</span>
+                    <span className="text-neutral-500 text-sm ml-2">{day.weekday}</span>
+                    {day.highlight && (
+                      <span className="ml-3 text-xs uppercase tracking-wide bg-neutral-900 text-white px-2 py-0.5">
+                        {day.highlight}
+                      </span>
+                    )}
+                  </div>
+                  <div className="text-right text-sm text-neutral-600 leading-relaxed">
+                    {confTime && <div>{confTime} Исповедь</div>}
+                    {liturgyTime && <div>{liturgyTime} Литургия</div>}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
 
-        <div className="border border-neutral-200 p-8 mb-10">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-14 h-14 bg-[#229ED9] rounded-full flex items-center justify-center flex-shrink-0">
-              <Icon name="Send" size={26} className="text-white" />
+        {/* Block 2 — Upcoming feasts */}
+        <section className="mb-12">
+          <div className="flex items-center gap-3 mb-6">
+            <Icon name="Star" size={20} className="text-neutral-400" />
+            <h2 className="text-xs uppercase tracking-widest text-neutral-700 font-semibold">Ближайшие праздники</h2>
+          </div>
+          <div className="flex flex-col gap-3">
+            {week.filter((d) => d.highlight).map((day) => (
+              <div key={day.date} className="border border-neutral-900 bg-neutral-50 px-5 py-4">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="font-semibold text-neutral-900 text-sm">
+                      {day.date}, {day.weekday}
+                    </p>
+                    <p className="text-neutral-600 text-sm mt-0.5">{day.saint}</p>
+                  </div>
+                  <span className="text-xs uppercase tracking-wide bg-neutral-900 text-white px-2 py-0.5 whitespace-nowrap flex-shrink-0">
+                    {day.highlight}
+                  </span>
+                </div>
+                <div className="mt-3 flex flex-col gap-1">
+                  {day.services.map((s) => (
+                    <p key={s.time} className="text-sm text-neutral-600">
+                      <span className="font-medium text-neutral-900 mr-2">{s.time}</span>{s.name}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Block 3 — Full schedule accordion */}
+        <section className="border-t border-neutral-200 pt-8">
+          <button
+            onClick={() => setShowFull(!showFull)}
+            className="flex items-center justify-between w-full text-left group"
+          >
+            <div className="flex items-center gap-3">
+              <Icon name="CalendarDays" size={20} className="text-neutral-400" />
+              <span className="text-xs uppercase tracking-widest text-neutral-700 font-semibold">Полное расписание недели</span>
             </div>
-            <div>
-              <p className="font-semibold text-neutral-900 text-lg">@hramiosif_calendar_bot</p>
-              <p className="text-neutral-500 text-sm">Бот расписания храма Иосифа Волоцкого</p>
+            <Icon
+              name="ChevronDown"
+              size={18}
+              className={`text-neutral-400 transition-transform duration-300 ${showFull ? "rotate-180" : ""}`}
+            />
+          </button>
+
+          {showFull && (
+            <div className="mt-6 flex flex-col gap-4">
+              {week.map((day) => (
+                <div key={day.date} className="border border-neutral-100 px-5 py-4">
+                  <div className="flex items-start justify-between mb-3">
+                    <div>
+                      <p className="font-semibold text-neutral-900 text-sm">
+                        {day.date}, {day.weekday}
+                      </p>
+                      <p className="text-neutral-500 text-xs mt-0.5">{day.saint}</p>
+                    </div>
+                    {day.highlight && (
+                      <span className="text-xs uppercase tracking-wide bg-neutral-900 text-white px-2 py-0.5 flex-shrink-0">
+                        {day.highlight}
+                      </span>
+                    )}
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    {day.services.map((s) => (
+                      <p key={s.time} className="text-sm text-neutral-600">
+                        <span className="font-medium text-neutral-900 mr-2">{s.time}</span>{s.name}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
+          )}
+        </section>
+
+        {/* Telegram bot */}
+        <div className="mt-12 border border-neutral-200 p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <div className="w-12 h-12 bg-[#229ED9] rounded-full flex items-center justify-center flex-shrink-0">
+            <Icon name="Send" size={22} className="text-white" />
+          </div>
+          <div className="flex-1">
+            <p className="font-semibold text-neutral-900 text-sm">Получайте расписание в Telegram</p>
+            <p className="text-neutral-500 text-sm">@hramiosif_calendar_bot — напоминания о службах и праздниках</p>
           </div>
           <a
             href="https://t.me/hramiosif_calendar_bot"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 bg-[#229ED9] text-white px-8 py-4 uppercase text-sm tracking-wide hover:bg-[#1a8bbf] transition-colors w-full justify-center sm:w-auto"
+            className="flex items-center gap-2 bg-[#229ED9] text-white px-5 py-3 uppercase text-xs tracking-wide hover:bg-[#1a8bbf] transition-colors whitespace-nowrap"
           >
-            <Icon name="Send" size={18} />
-            Открыть бота в Telegram
+            <Icon name="Send" size={15} />
+            Открыть бота
           </a>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-16">
-          {[
-            { icon: "CalendarDays", title: "Расписание на неделю", desc: "Актуальное расписание всех служб" },
-            { icon: "Bell", title: "Напоминания", desc: "Уведомления о праздниках и службах" },
-            { icon: "RefreshCw", title: "Обновления", desc: "Оперативные изменения в расписании" },
-          ].map((item) => (
-            <div key={item.title} className="border border-neutral-100 p-5">
-              <Icon name={item.icon} size={22} className="text-neutral-400 mb-3" />
-              <p className="font-semibold text-neutral-900 text-sm mb-1">{item.title}</p>
-              <p className="text-neutral-500 text-sm leading-relaxed">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="border-t border-neutral-200 pt-12">
-          <p className="text-xs uppercase tracking-widest text-neutral-500 mb-6">Расписание богослужений — май 2025</p>
-          <div className="flex flex-col gap-6">
-            {[
-              "https://cdn.poehali.dev/files/5ac23318-3f94-46fc-bd14-755261e3d1ca.png",
-              "https://cdn.poehali.dev/files/685033c9-ebd6-4217-a24d-c549af5f8c18.png",
-              "https://cdn.poehali.dev/files/858dc0e2-9cd2-4bc1-8222-9a20165e1f0a.png",
-              "https://cdn.poehali.dev/files/28bf4a98-b772-49e9-a620-b0ccec88b291.png",
-              "https://cdn.poehali.dev/files/50257cda-dd0e-42ec-91fe-14082d2cdbac.png",
-            ].map((src, i) => (
-              <a key={i} href={src} target="_blank" rel="noopener noreferrer">
-                <img
-                  src={src}
-                  alt={`Расписание богослужений, страница ${i + 1}`}
-                  className="w-full border border-neutral-200 hover:border-neutral-400 transition-colors"
-                />
-              </a>
-            ))}
-          </div>
-        </div>
       </div>
     </main>
   );
